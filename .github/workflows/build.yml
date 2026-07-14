@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unzip project
         run: unzip -o yapless-agent.zip -d _src
+      - name: Point WebView to live app
+        run: sed -i 's#file:///android_asset/index.html#https://yapless-ussd-production.up.railway.app/app.html#' _src/yapless-agent/app/src/main/java/net/yapson/agent/MainActivity.kt
       - name: Fix build.gradle
         run: |
           cat > _src/yapless-agent/app/build.gradle <<'GRADLE'
